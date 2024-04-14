@@ -38,6 +38,14 @@ function App() {
             let newTasks = [newTask, ...tasks1];
             setTasks1(newTasks);
       }
+
+      function changeStatus(taskId: string, isDone: boolean) {
+            let task = tasks1.find((t) => t.id === taskId);
+            if (task) {
+                  task.isDone = isDone;
+            }
+            setTasks1([...tasks1]);
+      }
       // let tasks2: Array<TaskType> = [
       //       { id: 1, title: 'HTML', isDone: true },
       //       { id: 2, title: 'JS', isDone: false },
@@ -52,8 +60,9 @@ function App() {
                         removeTask={removeTask}
                         changeFilter={changeFilter}
                         addTask={addTask}
+                        changeTaskStatus={changeStatus}
+                        filter={filter}
                   />
-                  {/* <Todolist title='What to learn:' tasks={tasks2} /> */}
             </div>
       );
 }
