@@ -11,10 +11,11 @@ type PropsType = {
       title: string;
       tasks: Array<TaskType>;
       removeTask: (id: string) => void;
-      changeFilter: (value: ValuesFilterType) => void;
+      changeFilter: (value: ValuesFilterType, todolistId: string) => void;
       addTask: (title: string) => void;
       changeTaskStatus: (taskId: string, isDone: boolean) => void;
       filter: ValuesFilterType;
+      id: string;
 };
 
 export function Todolist(props: PropsType) {
@@ -45,13 +46,13 @@ export function Todolist(props: PropsType) {
       };
 
       const onAllClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-            props.changeFilter('all');
+            props.changeFilter('all', props.id);
       };
       const onActiveClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-            props.changeFilter('active');
+            props.changeFilter('active', props.id);
       };
       const onCompletedClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
-            props.changeFilter('completed');
+            props.changeFilter('completed', props.id);
       };
 
       return (
