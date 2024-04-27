@@ -10,10 +10,10 @@ export type TaskType = {
 type PropsType = {
       title: string;
       tasks: Array<TaskType>;
-      removeTask: (id: string) => void;
+      removeTask: (taskId: string, todolistId: string) => void;
       changeFilter: (value: ValuesFilterType, todolistId: string) => void;
-      addTask: (title: string) => void;
-      changeTaskStatus: (taskId: string, isDone: boolean) => void;
+      addTask: (title: string, todolistId: string) => void;
+      changeTaskStatus: (taskId: string, isDone: boolean, todolistId: string) => void;
       filter: ValuesFilterType;
       id: string;
 };
@@ -27,7 +27,7 @@ export function Todolist(props: PropsType) {
       };
       const addTask = () => {
             if (newTitleTask.trim() !== '') {
-                  props.addTask(newTitleTask.trim());
+                  props.addTask(newTitleTask.trim(), props.id);
                   setNewTitleTask('');
             } else {
                   setError('Title is required');
@@ -37,7 +37,7 @@ export function Todolist(props: PropsType) {
             setError(null);
             if (e.key === 'Enter') {
                   if (newTitleTask.trim() !== '') {
-                        props.addTask(newTitleTask.trim());
+                        props.addTask(newTitleTask.trim(), props.id);
                         setNewTitleTask('');
                   } else {
                         setError('Title is required');
@@ -71,7 +71,7 @@ export function Todolist(props: PropsType) {
                   <ul>
                         {props.tasks.map((t) => {
                               const onRemoveTaskHandler = () => {
-                                    props.removeTask(t.id);
+                                    props.removeTask(t.id, props.id);
                               };
 
                               const onChangeStatus = (
@@ -79,7 +79,7 @@ export function Todolist(props: PropsType) {
                               ) => {
                                     props.changeTaskStatus(
                                           t.id,
-                                          e.currentTarget.checked
+                                          e.currentTarget.checked, props.id
                                     );
                               };
 
