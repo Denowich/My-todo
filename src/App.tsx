@@ -3,6 +3,7 @@ import './App.css';
 import { Todolist } from './Todolist';
 import { TaskType } from './Todolist';
 import { v1 } from 'uuid';
+import { AddItemForm } from './AddItemForm';
 
 export type ValuesFilterType = 'all' | 'active' | 'completed';
 type TodolistType = {
@@ -80,11 +81,22 @@ function App() {
             setTodolists(filteredTodolist);
 
             delete tasksObj[todolistId];
-            setTasks({...tasksObj})
+            setTasks({ ...tasksObj });
       };
+
+      function AddTodolist(title: string) {
+            let todolist: TodolistType = {
+                  id: v1(),
+                  filter: 'all',
+                  title: title,
+            };
+            setTodolists([todolist, ...todolists]);
+            setTasks({ ...tasksObj, [todolist.id]: [] });
+      }
 
       return (
             <div className='App'>
+                  <AddItemForm addItem={AddTodolist} />
                   {todolists.map((tl) => {
                         let tasksForTodolist = tasksObj[tl.id];
                         if (tl.filter === 'active') {
