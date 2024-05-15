@@ -1,6 +1,7 @@
 import React, { ChangeEvent, MouseEvent } from 'react';
 import { ValuesFilterType } from './App';
 import { AddItemForm } from './AddItemForm';
+import { EditableSpan } from './EditableSpan';
 
 export type TaskType = {
       id: string;
@@ -41,7 +42,7 @@ export function Todolist(props: PropsType) {
 
       const addTask = (title: string) => {
             props.addTask(title, props.id);
-      }
+      };
 
       return (
             <div>
@@ -76,7 +77,7 @@ export function Todolist(props: PropsType) {
                                                 checked={t.isDone}
                                                 onChange={onChangeStatus}
                                           />
-                                          <span>{t.title}</span>
+                                          <EditableSpan title={t.title}/>
                                           <button onClick={onRemoveTaskHandler}>
                                                 x
                                           </button>
