@@ -56,8 +56,8 @@ function App() {
       let todolistId2 = v1();
 
       let [todolists, setTodolists] = useState<Array<TodolistType>>([
-            { id: todolistId1, title: 'What to do:', filter: 'all' },
-            { id: todolistId2, title: 'What to learn:', filter: 'all' },
+            { id: todolistId1, title: 'What to do :', filter: 'all' },
+            { id: todolistId2, title: 'What to learn :', filter: 'all' },
       ]);
 
       let [tasksObj, setTasks] = useState<TasksStateType>({
@@ -71,6 +71,7 @@ function App() {
                   { id: v1(), title: 'HTML', isDone: true },
                   { id: v1(), title: 'JS', isDone: false },
                   { id: v1(), title: 'React', isDone: false },
+                  { id: v1(), title: 'Redux', isDone: true },
             ],
       });
 
@@ -92,6 +93,29 @@ function App() {
             };
             setTodolists([todolist, ...todolists]);
             setTasks({ ...tasksObj, [todolist.id]: [] });
+      }
+
+      function changeTitleStatus(
+            taskId: string,
+            todolistId: string,
+            newTitle: string
+      ) {
+            let tasks = tasksObj[todolistId];
+            let task = tasks.find((tl) => tl.id === taskId);
+            if (task) {
+                  task.title = newTitle;
+                  setTasks({ ...tasksObj });
+            }
+      }
+
+      function changeTodolistTitle(todolistId: string, newTitle: string) {
+            let changedTitleTodolist = todolists.find(
+                  (tl) => tl.id === todolistId
+            );
+            if (changedTitleTodolist) {
+                  changedTitleTodolist.title = newTitle;
+                  setTodolists([...todolists]);
+            }
       }
 
       return (
@@ -121,6 +145,8 @@ function App() {
                                     key={tl.id}
                                     id={tl.id}
                                     removeTodolist={removeTodolist}
+                                    changeTitleStatus={changeTitleStatus}
+                                    changeTodolistTitle={changeTodolistTitle}
                               />
                         );
                   })}
