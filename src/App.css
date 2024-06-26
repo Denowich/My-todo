@@ -1,34 +1,6 @@
-.App {
-      padding: 30px;
-      display: flex;
-}
-/* =============================== */
-
-.App > div {
-      margin-right: 50px;
-}
-/* =============================== */
-
 ul {
       list-style-type: none;
       padding: 0;
 }
+
 /* =============================== */
-
-.error {
-      border: red 1px solid;
-}
-
-.error-message {
-      color: red;
-}
-/* =============================== */
-
-.active-filter {
-      background-color: rgb(136, 255, 0);
-}
-/* =============================== */
-
-.is-done {
-      opacity: 0.5;
-}
